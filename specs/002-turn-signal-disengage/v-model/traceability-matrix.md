@@ -54,19 +54,69 @@ boundary condition rather than independent mechanisms.
 
 ## Matrix B — Verification (Architectural View)
 
-**Not yet populated.** Matrix B requires `system-design.md` (SYS component
-decomposition) for this feature, which has not been produced as of this
-step. Per the workflow, Matrix B is generated during/after the System Design
-step (`speckit-v-model-system-design` → `speckit-v-model-system-test`) and
-should be added to this document at that time, mirroring the format used in
-`specs/001-cruise-brake-override/v-model/traceability-matrix.md`.
+**Source**: `specs/002-turn-signal-disengage/v-model/system-design.md` (SYS
+decomposition) and `specs/002-turn-signal-disengage/v-model/system-test.md`
+(STP/STS test plan). SYS-001 (Turn Signal Monitor) is the only new component
+introduced by this feature; the five `001:SYS-NNN` rows are reused unmodified
+from `specs/001-cruise-brake-override/` and are cross-referenced to their
+existing, passing upstream `001:STP-*` test cases rather than re-verified here
+(per REQ-CN-001's reuse-without-modification mandate — see system-test.md's
+"reused, unmodified" section).
+
+| Requirement ID | System Component (SYS) | Component Name | Test Case ID (STP) | Technique | Scenario ID (STS) | Status |
+|----------------|------------------------|----------------|--------------------|-----------|--------------------|--------|
+| **REQ-001** | SYS-001 | Turn Signal Monitor | STP-001-A | Interface Contract Testing (External) | STS-001-A1 | ⬜ Untested |
+| | SYS-001 | Turn Signal Monitor | STP-001-A | Interface Contract Testing (External) | STS-001-A2 | ⬜ Untested |
+| | SYS-001 | Turn Signal Monitor | STP-001-A | Interface Contract Testing (External) | STS-001-A3 | ⬜ Untested |
+| **REQ-002** | SYS-001 | Turn Signal Monitor | STP-001-B | Interface Contract Testing (Internal) | STS-001-B1 | ⬜ Untested |
+| | SYS-001 | Turn Signal Monitor | STP-001-B | Interface Contract Testing (Internal) | STS-001-B2 | ⬜ Untested |
+| | SYS-001 | Turn Signal Monitor | STP-001-C | Interface Contract Testing (Internal) | STS-001-C1 | ⬜ Untested |
+| | SYS-001 | Turn Signal Monitor | STP-001-C | Interface Contract Testing (Internal) | STS-001-C2 | ⬜ Untested |
+| **REQ-003** | SYS-001 | Turn Signal Monitor | STP-001-C | Interface Contract Testing (Internal) | STS-001-C1 | ⬜ Untested |
+| | 001:SYS-001 | Cruise State Machine | 001:STP-001-A | Interface Contract Testing (Internal) | 001:STS-001-A1 | ⬜ Untested |
+| **REQ-004** | 001:SYS-003 | Longitudinal Speed Controller | 001:STP-003-B | Interface Contract Testing (Internal) | 001:STS-003-B1 | ⬜ Untested |
+| **REQ-005** | SYS-001 | Turn Signal Monitor | STP-001-B | Interface Contract Testing (Internal) | STS-001-B2 | ⬜ Untested |
+| **REQ-006** | SYS-001 | Turn Signal Monitor | STP-001-C | Interface Contract Testing (Internal) | STS-001-C2 | ⬜ Untested |
+| | 001:SYS-001 | Cruise State Machine | 001:STP-001-A | Interface Contract Testing (Internal) | 001:STS-001-A1 | ⬜ Untested |
+| **REQ-007** | SYS-001 | Turn Signal Monitor | STP-001-A | Interface Contract Testing (External) | STS-001-A3 | ⬜ Untested |
+| **REQ-008** | SYS-001 | Turn Signal Monitor | STP-001-E | Boundary Value Analysis | STS-001-E1 | ⬜ Untested |
+| | SYS-001 | Turn Signal Monitor | STP-001-E | Boundary Value Analysis | STS-001-E2 | ⬜ Untested |
+| **REQ-009** | SYS-001 | Turn Signal Monitor | STP-001-D | Interface Contract Testing (Internal) | STS-001-D2 | ⬜ Untested |
+| | 001:SYS-007 | Notification Dispatcher | 001:STP-007-A | Interface Contract Testing (External) | 001:STS-007-A1 | ⬜ Untested |
+| | 001:SYS-007 | Notification Dispatcher | 001:STP-007-B | Interface Contract Testing (Internal) | 001:STS-007-B1 | ⬜ Untested |
+| **REQ-010** | SYS-001 | Turn Signal Monitor | STP-001-D | Interface Contract Testing (Internal) | STS-001-D1 | ⬜ Untested |
+| | 001:SYS-006 | Safety Event Logger | 001:STP-006-A | Interface Contract Testing (Internal) | 001:STS-006-A1 | ⬜ Untested |
+| | 001:SYS-006 | Safety Event Logger | 001:STP-006-B | Boundary Value Analysis | 001:STS-006-B1 | ⬜ Untested |
+| **REQ-NF-001** | SYS-001 | Turn Signal Monitor | STP-001-E | Boundary Value Analysis | STS-001-E1 | ⬜ Untested |
+| **REQ-IF-001** | SYS-001 | Turn Signal Monitor | STP-001-A | Interface Contract Testing (External) | STS-001-A1 | ⬜ Untested |
+| **REQ-IF-002** | 001:SYS-003 | Longitudinal Speed Controller | 001:STP-003-A | Interface Contract Testing (External) | 001:STS-003-A1 | ⬜ Untested |
+| **REQ-IF-003** | SYS-001 | Turn Signal Monitor | STP-001-D | Interface Contract Testing (Internal) | STS-001-D2 | ⬜ Untested |
+| | 001:SYS-007 | Notification Dispatcher | 001:STP-007-A | Interface Contract Testing (External) | 001:STS-007-A1 | ⬜ Untested |
+| **REQ-IF-004** | SYS-001 | Turn Signal Monitor | STP-001-D | Interface Contract Testing (Internal) | STS-001-D1 | ⬜ Untested |
+| | 001:SYS-006 | Safety Event Logger | 001:STP-006-A | Interface Contract Testing (Internal) | 001:STS-006-A1 | ⬜ Untested |
+| **REQ-CN-001** | SYS-001 | Turn Signal Monitor | STP-001-B | Interface Contract Testing (Internal) | STS-001-B1 | ⬜ Untested |
+| | SYS-001 | Turn Signal Monitor | STP-001-C | Interface Contract Testing (Internal) | STS-001-C1 | ⬜ Untested |
+| **REQ-CN-002** | SYS-001 | Turn Signal Monitor | STP-001-G | Fault Injection | STS-001-G1 | ⬜ Untested |
+| **REQ-CN-003** | SYS-001 | Turn Signal Monitor | STP-001-B | Interface Contract Testing (Internal) | STS-001-B2 | ⬜ Untested |
+| | 001:SYS-001 | Cruise State Machine | 001:STP-001-A | Interface Contract Testing (Internal) | 001:STS-001-A1 | ⬜ Untested |
+
+### Matrix B Coverage
+
+| Metric | Value |
+|--------|-------|
+| **Total System Components (SYS, this feature)** | 1 new (SYS-001) + 5 upstream references (`001:SYS-NNN`) |
+| **Total System Test Cases (STP, new)** | 7 (STP-001-A .. STP-001-G) |
+| **Total System Scenarios (STS, new)** | 13 |
+| **REQ → SYS Coverage** | 18/18 (100%) |
+| **SYS → STP Coverage** | 1/1 new components (100%); all 5 upstream components cross-referenced to existing passing 001-slice STPs (not re-tested) |
 
 ### Open Items
 
-| Flag | Pending Resolution |
-|------|--------------------|
-| Matrix B (Verification) | Deferred — awaits `specs/002-turn-signal-disengage/v-model/system-design.md` |
-
-No gaps were found in Matrix A: every requirement in
-`specs/002-turn-signal-disengage/v-model/requirements.md` has at least one
-linked Test Case, and every Test Case has at least one linked Scenario.
+None. Both Matrix A and Matrix B achieve 100% coverage for this feature:
+every requirement in `specs/002-turn-signal-disengage/v-model/requirements.md`
+has at least one linked acceptance Test Case (Matrix A) and at least one
+linked system Test Case (Matrix B, either a new STP or a cross-referenced
+upstream `001:STP-*`); every Test Case in both matrices has at least one
+linked Scenario. The upstream open questions (OQ-001 ASIL D, OQ-002
+T_max = 100 ms, OQ-003 `Cruise_Cancelled` target state) were already resolved
+in the 001 slice and are inherited without re-opening.
